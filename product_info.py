@@ -27,8 +27,8 @@ def get_product_list(product_name):
 	for item in product_items:
 		product_url = item.find(class_ = 'prominent').get('href')
 		name = item.find(class_ = 'prominent').string
-		brand = item.find(class_ = 'brand').string
-		brand_url = item.find(class_ = 'brand').get('href')
+		brand = item.find(class_ = 'brand').string if item.find(class_ = 'brand') != None else ''
+		brand_url = item.find(class_ = 'brand').get('href') if item.find(class_ = 'brand') != None else ''
 		product_list.append([product_url, brand_url, name, brand])
 
 	return product_list
