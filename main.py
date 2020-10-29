@@ -9,7 +9,7 @@ try:
         print(id, product[2], product[3])
 
     selection = int(input('Please select one of the products: '))
-    while selection >= len(product_list) & selection >= 0:
+    while selection >= len(product_list) & selection < 0:
         selection = int(input('Please select again: '))
 
     selection_product_url = product_list[selection][0]
@@ -17,7 +17,7 @@ try:
 
     nutrition_info = product_info.get_nutrition(selection_product_url)
     for info in nutrition_info:
-        print(info, nutrition_info[info])   
+        print(info, ':', nutrition_info[info])   
 
 except:
     print('Product not found')
