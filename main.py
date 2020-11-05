@@ -1,6 +1,11 @@
 import product_info
+from barcode_scanner_video import get_barcode
+from get_barcode_info import get_product
 
+get_barcode()
+# print(get_product('8695077102010'))
 
+"""
 product_name = str(input('Please enter product name: '))
 
 try:
@@ -21,3 +26,5 @@ try:
 
 except:
     print('Product not found')
+
+"""

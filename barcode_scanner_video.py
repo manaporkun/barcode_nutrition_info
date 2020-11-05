@@ -5,6 +5,7 @@ import datetime
 import imutils
 import time
 import cv2
+from get_barcode_info import get_product
 
 def get_barcode():
 # construct the argument parser and parse the arguments
@@ -47,7 +48,8 @@ def get_barcode():
 			barcodeType = barcode.type
 
 			# draw the barcode data and barcode type on the image
-			text = "{} ({})".format(barcodeData, barcodeType)
+			#text = "{} ({})".format(barcodeData, barcodeType)
+			text = "{}: {}".format(get_product(barcodeData), barcodeData)
 			cv2.putText(frame, text, (x, y - 10),
 				cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
@@ -72,5 +74,3 @@ def get_barcode():
 	csv.close()
 	cv2.destroyAllWindows()
 	vs.stop()
-
-	return False
