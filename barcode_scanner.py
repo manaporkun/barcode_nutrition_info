@@ -2,7 +2,7 @@ from imutils.video import VideoStream
 from pyzbar import pyzbar
 import imutils
 import cv2
-from get_barcode_info import get_product
+from get_barcode_info import get_barcode
 
 
 def get_barcode(db):
@@ -26,8 +26,8 @@ def get_barcode(db):
 
             query = {'barcode': barcode_data}
 
-            if db.get(query).collection.count_documents(query) == 0:
-                db.push(get_product(barcode_data))
+            if db.get(query).collection.count_documents(query) == 0:                
+                db.push(get_barcode(barcode_data))
 
             text = db.get(query)[0]['name']
             

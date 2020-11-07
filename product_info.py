@@ -34,29 +34,28 @@ def get_product_list(product_name):
 	return product_list
 	
 
-def get_nutrition(product_url):
+def get_nutrition(product_url, product_info):
 
 	soup = get_search_soup(product_name)
 
 	product_page = requests.get(url+product_url)
 	soup = BeautifulSoup(product_page.text, 'html.parser')
 
-	nutrition_facts = soup.find(class_ = 'generic spaced').find_all('div') if soup.find(class_ = 'generic spaced') != None else []
+	soup_generic = soup.find(class_ = 'generic spaced')
 
-	manufacturer = soup.find(class_ = 'manufacturer').find_all('a')[0].string if soup.find(class_ = 'manufacturer') != None else ''
-	name = soup.find(class_ = 'center').find_all('h1')[0].string if soup.find(class_ = 'center') != None else ''
-	calorie = nutrition_facts[1].string
-	fat = nutrition_facts[3].string
-	carbonhydrate = nutrition_facts[5].string
-	protein = nutrition_facts[7].string
+	if soup_generic is not None:
 
-	info = {
-			'Manufacturer':manufacturer,
-			'Name':name,
-			'Calorie':calorie,
-			'Fat':fat,
-			'Carbohydrate':carbonhydrate,
-			'Protein':protein,
-			}
+		nutrition_facts = soup_generic.find_all('div')
+
+		product_info['calorie'] = nutrition_facts[1].string
+		product_info['fat'] = nutrition_facts[3].string
+		product_info['carbonhydrate'] = nutrition_facts[5].string
+		product_info['protein'] = nutrition_facts[7].string
+
+	else:
+		pass
+
+	# manufacturer = soup.find(class_ = 'manufacturer').find_all('a')[0].string if soup.find(class_ = 'manufacturer') != None else ''
+	# name = soup.find(class_ = 'center').find_all('h1')[0].string if soup.find(class_ = 'center') != None else ''
 	
-	return info
+	return product_info

@@ -1,7 +1,7 @@
 from os import error
 import product_info
 from barcode_scanner import get_barcode
-from get_barcode_info import get_product
+from get_barcode_info import get_barcode
 from database_operations import mongoDB
 
 
