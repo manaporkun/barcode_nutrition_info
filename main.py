@@ -1,14 +1,14 @@
 from os import error
 import product_info
-from barcode_scanner import get_barcode
-from get_barcode_info import get_barcode
+from barcode_scanner import read_barcode
+from get_barcode_info import read_barcode
 from database_operations import mongoDB
 
 
 db = mongoDB('product', 'barcode')
 #query = {'barcode':'8699809190139'}
 #print(db.get(query)[0])
-get_barcode(db)
+read_barcode(db)
 
 """
 # product = get_product('8695077102010')

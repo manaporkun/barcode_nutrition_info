@@ -5,7 +5,7 @@ import cv2
 from get_barcode_info import get_barcode
 
 
-def get_barcode(db):
+def read_barcode(db):
     vs = VideoStream(src=0).start()
     text = ''
 
