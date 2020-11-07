@@ -9,9 +9,25 @@ def get_product(barcode):
 	barcode_page = requests.get(url + barcode)
 	soup = BeautifulSoup(barcode_page.text, 'html.parser')
 
-	name = soup.find("span", {"id": "lblSonuclar"}).find_all('a')[0].string
+	my_soup = soup.find("span", {"id": "lblSonuclar"})
 
-	return name
+	barcode_info = {
+		'manufacturer': '',
+		'name': '',
+		'barcode': barcode,
+		'country': '',
+		'code': '',
+		'price': '',
+		'date': '',
+		'area:': ''
+	}
+	if my_soup is not None:
+		barcode_info['name'] = my_soup.find_all('a')[0].string
+	else:
+		pass
+	
+	return barcode_info
+	
 
 	"""
 	if soup.find(id_='lblSonuclar') is not None:

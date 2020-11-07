@@ -1,8 +1,41 @@
+from os import error
 import product_info
-from barcode_scanner_video import get_barcode
+from barcode_scanner import get_barcode
 from get_barcode_info import get_product
+from database_operations import mongoDB
 
-get_barcode()
+
+db = mongoDB('product', 'barcode')
+#query = {'barcode':'8699809190139'}
+#print(db.get(query)[0])
+get_barcode(db)
+
+"""
+# product = get_product('8695077102010')
+db = mongoDB('product', 'barcode')
+
+query = {'barcode':'8695077102010'}
+# column = db.push(product)
+print(db.get(query)[0])
+
+"""
+
+"""
+try:
+
+    db = mongoDB()
+
+    if not db.if_exists_db('product') and not db.if_exists_table('barcode'):
+        db.create('product', 'barcode')
+        column = db.push(product)
+        print(column)
+
+
+except:
+    print('error')
+"""
+
+# get_barcode()
 # print(get_product('8695077102010'))
 
 """
