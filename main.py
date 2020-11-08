@@ -1,14 +1,22 @@
 from os import error
 import product_info
-from barcode_scanner import read_barcode
-from get_barcode_info import read_barcode
+import barcode_scanner
+from get_barcode_info import get_barcode_information
 from database_operations import mongoDB
+from ui import ui
 
+class main():
+    def __init__(self):
+        self.barcode = barcode_scanner.get_barcode_data()
+        self.db = mongoDB('product', 'barcode')
+        #query = {'barcode':'8699809190139'}
+        #print(db.get(query)[0])
+        
+        barcode_scanner.read_barcode(self.db)
+            
 
-db = mongoDB('product', 'barcode')
-#query = {'barcode':'8699809190139'}
-#print(db.get(query)[0])
-read_barcode(db)
+start = main()
+
 
 """
 # product = get_product('8695077102010')

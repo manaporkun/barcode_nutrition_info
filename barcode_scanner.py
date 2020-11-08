@@ -2,12 +2,16 @@ from imutils.video import VideoStream
 from pyzbar import pyzbar
 import imutils
 import cv2
-from get_barcode_info import get_barcode
+from get_barcode_info import get_barcode_information
+from ui import ui
 
+
+barcode_data = ''
 
 def read_barcode(db):
     vs = VideoStream(src=0).start()
     text = ''
+    my_ui = ui()
 
     while True:
 
@@ -21,15 +25,18 @@ def read_barcode(db):
             (x, y, w, h) = barcode.rect
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
+            global barcode_data 
             barcode_data = barcode.data.decode("utf-8")
             # barcode_type = barcode.type
 
             query = {'barcode': barcode_data}
 
             if db.get(query).collection.count_documents(query) == 0:                
-                db.push(get_barcode(barcode_data))
-
-            text = db.get(query)[0]['name']
+                db.push(get_barcode_information(barcode_data))
+            
+            product = db.get(query)[0]
+            my_ui.update_ui(product)
+            # text = product['name']
             
             """
             text = "{}: {}".format(db.get(query)[0]['name'], barcode_data)
@@ -45,4 +52,8 @@ def read_barcode(db):
             break
 
     cv2.destroyAllWindows()
-    vs.stop()
+    return False
+
+
+def get_barcode_data():
+    return barcode_data

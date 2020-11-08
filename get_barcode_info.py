@@ -5,7 +5,7 @@ from product_info import get_nutrition
 url = 'http://m.barkodoku.com/'
 
 
-def get_barcode(barcode):
+def get_barcode_information(barcode):
 
 	barcode_page = requests.get(url + barcode)
 	soup = BeautifulSoup(barcode_page.text, 'html.parser')
