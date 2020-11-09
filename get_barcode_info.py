@@ -20,7 +20,7 @@ def get_barcode_information(barcode):
 		'price': '',
 		'calorie': '',
 		'fat': '',
-		'carbonhydrate:': '',
+		'carbonhydrate': '',
 		'protein':''
 	}
 	try:
