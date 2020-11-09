@@ -55,7 +55,7 @@ def get_nutrition(product_url, product_info):
 	else:
 		pass
 
-	# manufacturer = soup.find(class_ = 'manufacturer').find_all('a')[0].string if soup.find(class_ = 'manufacturer') != None else ''
+	product_info['manufacturer'] = soup.find(class_ = 'manufacturer').find_all('a')[0].string if soup.find(class_ = 'manufacturer') != None else ''
 	# name = soup.find(class_ = 'center').find_all('h1')[0].string if soup.find(class_ = 'center') != None else ''
 	
 	return product_info

@@ -3,20 +3,31 @@ import product_info
 import barcode_scanner
 from get_barcode_info import get_barcode_information
 from database_operations import mongoDB
-from ui import ui
 
+db = mongoDB('product', 'barcode')
+#query = {'barcode':'8695077102010'}
+#print(db.get(query)[0])
+barcode_scanner.read_barcode(db)
+#barcode = barcode_scanner.get_barcode_data()
+
+#db.delete(query)
+#db.push(get_barcode_information('8695077102010'))
+#print(db.get(query)[0])
+
+
+"""
 class main():
     def __init__(self):
         self.barcode = barcode_scanner.get_barcode_data()
         self.db = mongoDB('product', 'barcode')
-        #query = {'barcode':'8699809190139'}
+        #query = {'barcode':'8695077102010'}
         #print(db.get(query)[0])
-        
         barcode_scanner.read_barcode(self.db)
+        # ui()
             
 
 start = main()
-
+"""
 
 """
 # product = get_product('8695077102010')

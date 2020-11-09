@@ -18,6 +18,9 @@ class mongoDB:
 
     def push(self, data):
         return self.column.insert(data)
+    
+    def delete(self, query):
+        return self.column.delete_one(query)
 
     def if_exists_db(self, db_name):
         dblist = self.client.list_database_names()

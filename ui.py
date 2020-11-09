@@ -21,7 +21,7 @@ class ui:
         self.text_carbonhydrate_2 = QLabel(self.window)
         self.text_protein_2 = QLabel(self.window)
 
-        self.init_ui(self)
+        self.init_ui()
         
 
     def init_ui(self):
@@ -117,5 +117,3 @@ class ui:
         self.text_protein_2.setText(product['protein'])
         self.text_protein_2.setFont(QFont('Times', 16))
         self.text_protein_2.move(250, 550)
-
-u = ui()

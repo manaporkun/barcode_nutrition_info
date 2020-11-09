@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-from product_info import get_nutrition
+from product_info import get_nutrition, get_product_list
 
-url = 'http://m.barkodoku.com/'
+url = 'http://barkodoku.com/'
 
 
 def get_barcode_information(barcode):
@@ -10,7 +10,7 @@ def get_barcode_information(barcode):
 	barcode_page = requests.get(url + barcode)
 	soup = BeautifulSoup(barcode_page.text, 'html.parser')
 
-	my_soup = soup.find("span", {"id": "lblSonuclar"})
+	my_soup = soup.find("div", {"class": "col-xs-24 col-sm-24 col-md-9 excerpet"})
 
 	barcode_info = {
 		'manufacturer': '',
@@ -23,15 +23,20 @@ def get_barcode_information(barcode):
 		'carbonhydrate:': '',
 		'protein':''
 	}
-
-	if my_soup is not None:
-		barcode_info['name'] = my_soup.find_all('a')[0].string
-		barcode_info['manufacturer'] = my_soup.find_all('br')[2].string
-		barcode_info['country'] = my_soup.find_all('br')[1].string
-		barcode_info['price'] = my_soup.find_all('br')[4].string
-	else:
-		pass
-
-	barcode_info = get_nutrition(barcode_info)
+	try:
+		if my_soup is not None:
+			barcode_info['name'] = my_soup.find_all('a')[0].string
+			barcode_info['date'] = my_soup.find_all('span')[1].string
+			barcode_info['country'] = my_soup.find_all('span')[3].string
+			barcode_info['price'] = my_soup.find_all('span')[2].string
+		else:
+			return 
+		
+		product_name = barcode_info['name']
+		product_list = get_product_list(product_name)
+		barcode_info = get_nutrition(product_list[0][0], barcode_info)
+	except IndexError:
+		print('\n'+barcode+'\n')
 	
 	return barcode_info
+	
