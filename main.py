@@ -2,9 +2,9 @@ from os import error
 import product_info
 import barcode_scanner
 from get_barcode_info import get_barcode_information
-from database_operations import mongoDB
+from database_operations import MongoDB
 
-db = mongoDB('product', 'barcode')
+db = MongoDB('product', 'barcode')
 #query = {'barcode':'8695077102010'}
 #print(db.get(query)[0])
 barcode_scanner.read_barcode(db)
