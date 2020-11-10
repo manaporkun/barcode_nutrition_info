@@ -9,7 +9,9 @@ db = MongoDB('product', 'barcode')
 #my_ui = ui()
 #query = {'barcode':'8695077102010'}
 #print(db.get(query)[0])
+
 barcode_scanner.read_barcode(db)
+
 #barcode = barcode_scanner.get_barcode_data()
 
 #db.delete(query)
