@@ -7,13 +7,16 @@ from ui import ui
 
 old_barcode = ''
 barcode_data = ''
+query = ''
 
 
 def read_barcode(db):
-    vs = VideoStream(src=1).start()
+    vs = VideoStream(src=0).start()
     text = ''
+    
     global barcode_data
     global old_barcode
+    global query
 
     while True:
 
@@ -33,18 +36,16 @@ def read_barcode(db):
             query = {'barcode': barcode_data}
 
             if db.get(query).collection.count_documents(query) == 0 and barcode_data != '':
-                db.push(get_barcode_information(barcode_data))
-
-            # product = db.get(query)[0]
-            # my_ui.update_ui(product)
+                product = get_barcode_information(barcode_data)
+                if product['name'] == '' or product['name'] == None:
+                    pass
+                else:
+                    db.push(get_barcode_information(barcode_data))
 
             text = barcode_data
-            # text = "{}: {}".format(barcode_data)
             cv2.putText(frame, text, (x, y - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-        query = {'barcode': barcode_data}
-        # cv2.putText(frame, text, (720//2, 200), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 4)
         if barcode_data != '' and old_barcode != barcode_data:
             print(db.get(query)[0])
             old_barcode = barcode_data
