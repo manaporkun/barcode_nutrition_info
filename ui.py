@@ -1,11 +1,11 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import * 
+from PyQt5.QtWidgets import *
 import sys
 
-class ui:
-    def __init__(self):
 
+class UI:
+    def __init__(self):
         self.app = QApplication(sys.argv)
         self.window = QWidget()
         self.window.resize(480, 720)
@@ -22,7 +22,6 @@ class ui:
         self.text_protein_2 = QLabel(self.window)
 
         self.init_ui()
-        
 
     def init_ui(self):
         title = QLabel(self.window)
@@ -75,13 +74,10 @@ class ui:
         text_protein.setFont(QFont('Times', 16))
         text_protein.move(10, 550)
 
-
         self.window.show()
         self.app.exec_()
 
     def update_ui(self, product):
-
-        
         self.text_name_2.setText(product['name'])
         self.text_name_2.setFont(QFont('Times', 16))
         self.text_name_2.move(250, 150)

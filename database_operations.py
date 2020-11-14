@@ -4,7 +4,8 @@ import pymongo
 class MongoDB:
 
     def __init__(self, db_name, table_name):
-        self.client = pymongo.MongoClient("mongodb+srv://{}:{}@cluster0.gjh1q.mongodb.net/{}?retryWrites=true&w=majority".format('orkunmanap', 'yyuKFj15rIG7Yx0l', db_name))
+        self.url = "mongodb+srv://{}:{}@cluster0.gjh1q.mongodb.net/{}?retryWrites=true&w=majority"
+        self.client = pymongo.MongoClient(self.url.format('orkunmanap', 'yyuKFj15rIG7Yx0l', db_name))
         self.db = self.client[db_name]
         self.column = self.db[table_name]
 

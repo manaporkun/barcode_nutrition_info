@@ -3,7 +3,7 @@ from pyzbar import pyzbar
 import imutils
 import cv2
 from get_barcode_info import get_barcode_information
-from ui import ui
+
 
 old_barcode = ''
 barcode_data = ''
@@ -14,7 +14,7 @@ product_count = 0
 def read_barcode(db):
     vs = VideoStream(src=0).start()
     text = ''
-    
+
     global barcode_data
     global old_barcode
     global query
@@ -36,7 +36,7 @@ def read_barcode(db):
             # barcode_type = barcode.type
 
             query = {'barcode': barcode_data}
-            
+
             product_count = db.get(query).collection.count_documents(query)
             print(product_count)
             if product_count == 0 and barcode_data != '':
@@ -46,7 +46,7 @@ def read_barcode(db):
                 else:
                     db.push(product)
                     print('\npushed\n:', product['name'])
-            
+
             text = barcode_data
             cv2.putText(frame, text, (x, y - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
@@ -61,7 +61,7 @@ def read_barcode(db):
         if key == ord("q"):
             break
 
-    #cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()
 
 
 def get_barcode_data():

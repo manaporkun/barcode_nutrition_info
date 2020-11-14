@@ -1,22 +1,28 @@
-from os import error
-import product_info
-import barcode_scanner
+# from os import error
+# import product_info
+# import barcode_scanner
 from get_barcode_info import get_barcode_information
 from database_operations import MongoDB
-from ui import ui
+# from ui import UI
+import new_barcode_scanner
+
 
 db = MongoDB('product', 'barcode')
-#my_ui = ui()
-#query = {'barcode':'8695077102010'}
-#print(db.get(query)[0])
 
-barcode_scanner.read_barcode(db)
+b_scanner = new_barcode_scanner.BarcodeScanner(db)
 
-#barcode = barcode_scanner.get_barcode_data()
+b_scanner.read_barcode()
+# my_ui = ui()
+# query = {'barcode':'8695077102010'}
+# print(db.get(query)[0])
 
-#db.delete(query)
-#db.push(get_barcode_information('8695077102010'))
-#print(db.get(query)[0])
+# barcode_scanner.read_barcode(db)
+
+# barcode = barcode_scanner.get_barcode_data()
+
+# db.delete(query)
+# db.push(get_barcode_information('8695077102010'))
+# print(db.get(query)[0])
 
 
 """
