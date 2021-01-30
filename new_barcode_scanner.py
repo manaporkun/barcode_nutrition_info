@@ -23,9 +23,9 @@ class BarcodeScanner:
             frame = imutils.resize(frame, width=720)
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-            #calculate x & y gradient
-            gradX = cv2.Sobel(gray, ddepth = cv2.CV_32F, dx = 1, dy = 0, ksize = -1)
-            gradY = cv2.Sobel(gray, ddepth = cv2.CV_32F, dx = 0, dy = 1, ksize = -1)
+            # calculate x & y gradient
+            gradX = cv2.Sobel(gray, ddepth=cv2.CV_32F, dx=1, dy=0, ksize=-1)
+            gradY = cv2.Sobel(gray, ddepth=cv2.CV_32F, dx=0, dy=1, ksize=-1)
 
             # subtract the y-gradient from the x-gradient
             gradient = cv2.subtract(gradX, gradY)
@@ -53,10 +53,8 @@ class BarcodeScanner:
                 self.isBarcode = self.barcode_data[0] == '8'
 
                 if self.isBarcode and self.barcode_data != '' and self.old_barcode != self.barcode_data:
-
                     self.product_count = self.db.get(self.query).collection.count_documents(self.query)
 
-                # print(self.product_count)
                 if self.isBarcode and self.product_count == 0 and self.barcode_data != '':
                     product = get_barcode_information(self.barcode_data)
                     if product['name'] == '' or product['name'] is None:
@@ -68,7 +66,7 @@ class BarcodeScanner:
                 text = self.barcode_data
                 cv2.putText(frame, text, (x, y - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-            
+
             if self.isBarcode and self.product_count != 0 and self.barcode_data != '' and self.old_barcode != self.barcode_data:
                 product = self.db.get(self.query)[0]
                 print('\n')
@@ -77,7 +75,7 @@ class BarcodeScanner:
                 print('\n------------------------------------------------')
                 self.old_barcode = self.barcode_data
                 continue
-            
+
             cv2.imshow("Barcode Scanner", frame)
             key = cv2.waitKey(1) & 0xFF
 
@@ -85,4 +83,3 @@ class BarcodeScanner:
                 break
 
         cv2.destroyAllWindows()
-

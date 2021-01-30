@@ -2,11 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 from product_info import get_nutrition, get_product_list
 
-
 url = 'http://barkodoku.com/'
+
 
 def get_barcode_information(barcode):
     barcode_page = requests.get(url + barcode)
+    print(barcode_page)
     soup = BeautifulSoup(barcode_page.text, 'html.parser')
 
     my_soup = soup.find("div", {"class": "col-xs-24 col-sm-24 col-md-9 excerpet"})
