@@ -21,3 +21,8 @@ Firstly, you need to create a MongoDB Cloud Server. After that, you have to inst
 For example you can run the code like this:
 
 python main.py db_name table_name user_name password
+
+Screenshots:
+
+![](Screenshots/1.png)
+![](Screenshots/2.png)
